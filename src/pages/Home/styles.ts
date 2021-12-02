@@ -6,6 +6,7 @@ export const Content = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding-top: 2rem;
 
     @media only screen and (min-width: 768px) {
         & {

@@ -57,7 +57,8 @@ export const reducer = (state: State, action: Action): State => {
 
 const storedtasklist = () => {
     const stored = localStorage.getItem(LocalStorageKey.TASKLIST);
-    return stored ? new Tasklist(JSON.parse(stored)) : new Tasklist();
+    console.log(new Tasklist(JSON.parse(stored!)));
+    return stored ? new Tasklist(...JSON.parse(stored)) : new Tasklist();
 };
 
 export const initialState: State = {

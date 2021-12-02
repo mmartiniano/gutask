@@ -8,7 +8,7 @@ export class Tasklist extends Array {
     }
 
     sort_by_gut() {
-        this.sort((task_a, task_b) => task_b.gut - task_a.gut);
+        this.sort((task_a, task_b) => task_b.status - task_a.status || task_b.gut - task_a.gut);
     }
 
 }

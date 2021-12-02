@@ -10,4 +10,5 @@ export interface ICreateTask extends IGUT {
 
 export interface ITask extends ICreateTask {
     id: number;
+    status: boolean;
 }

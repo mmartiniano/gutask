@@ -7,6 +7,8 @@ export default class Task implements ITask {
     public urgency: number;
     public tendency: number;
     public id: number;
+    public status: boolean;
+    public gut: number;
     public static lastId: number;
 
     constructor(task: ICreateTask) {
@@ -14,6 +16,8 @@ export default class Task implements ITask {
         this.gravity = task.gravity;
         this.urgency = task.urgency;
         this.tendency = task.tendency;
+        this.status = false;
+        this.gut = this.gravity * this.urgency * this.tendency;
         this.id = Task.generateId();
     }
 
@@ -22,9 +26,5 @@ export default class Task implements ITask {
         else this.lastId++;
 
         return this.lastId;
-    }
-
-    get gut() {
-        return this.gravity * this.urgency * this.tendency;
     }
 }

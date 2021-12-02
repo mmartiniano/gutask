@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import Card from '../../components/Card';
+import TaskCard from '../../components/TaskCard';
 import { Context } from '../../Context';
 import { Tasklist } from '../../models/Tasklist';
 
@@ -14,9 +14,7 @@ const Home: React.FC = () => {
     return (
         <Content>
             {tasklist.map((task, key) => (
-                <Card key={key}>
-                    <Card.Title>{task.description}</Card.Title>
-                </Card>
+                <TaskCard key={key} task={task} />
             ))}
         </Content>
     )

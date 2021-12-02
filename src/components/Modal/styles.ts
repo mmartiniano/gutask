@@ -6,7 +6,14 @@ interface Props {
 }
 
 export const Container = styled.div`
-    width: 50%;
+    width: 80%;
+
+    @media only screen and (min-width: 750px) {
+        & {
+            width: 50%;
+        }
+    }
+
     padding: 2rem;
     font-size: .9rem;
 
@@ -18,7 +25,8 @@ export const Container = styled.div`
 	border-radius: ${props => props.theme.radius};
 	overflow-y: auto;
 	margin-top: 10%;
-	height: 70vh;
+	min-height: 70vh;
+    max-height: 85vh;
 	
 	opacity: 0;
 
@@ -56,9 +64,7 @@ export const StyledFooter = styled.div`
     font-weight: bold;
     display: flex;
     justify-content: space-between;
-    position: absolute;
-    bottom: 2rem;
-    right: 2rem;
+    float: right;
 `;
 
 export const StyledBody = styled.div`

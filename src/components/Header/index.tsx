@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState, ChangeEvent } from 'react';
+import React, { useContext, useState, ChangeEvent } from 'react';
 import { ThemeContext } from 'styled-components';
 import Switch from 'react-switch';
 
-import { ICreateTask, IGUT, ITask } from '../../@types';
+import { ICreateTask, IGUT } from '../../@types';
 
 import { Context, ActionType, LocalStorageKey } from '../../Context';
 import { Container, Nav } from './styles';
@@ -13,6 +13,7 @@ import Button from '../Button';
 import Rating from '../Rating';
 import usePersistedState from '../../utils/usePersistedState';
 import Task from '../../models/Task';
+import { Tasklist } from '../../models/Tasklist';
 
 
 interface Props {
@@ -47,14 +48,20 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
     }
 
     const handleSubmit = () => {
+        if (!draft.description || draft.description.trim() === '')
+            return
+
+        handleClose();
         const task = new Task(draft);
         if (context) {
-            const tasklist = new Map<number, ITask>(context.state.tasklist);
-            tasklist.set(task.id, task)
+
+            const tasklist = new Tasklist(...context.state.tasklist);
+            tasklist.push(task);
+
             context.dispatch({
                 type: ActionType.WRITE,
                 payload: {
-                    ...context.state,
+                    ...(context.state),
                     tasklist
                 }
             });
@@ -63,6 +70,8 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
                 type: ActionType.CLEAR_DRAFT_CREATE,
                 payload: { tasklist }
             });
+
+            setDraft(initialTask);
         }
     }
 
@@ -93,10 +102,6 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
         </>
     )
 
-    useEffect(() => {
-        console.log(draft)
-    }, [draft]);
-
     return (
         <>
             <Container>
@@ -121,9 +126,10 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
                 </Nav>
             </Container>
             <Modal show={showModal} onHide={handleClose}>
-                <Modal.Title onHide={handleClose}> Create Task </Modal.Title>
-                <Modal.Body>
-                    <form onSubmit={handleSubmit} >
+                <form onSubmit={handleSubmit} >
+                    <Modal.Title onHide={handleClose}> Create Task </Modal.Title>
+                    <Modal.Body>
+
                         <Input
                             onChange={handleChange}
                             name="description"
@@ -131,11 +137,11 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
                             placeholder="Description"
                         />
                         <RatingGroup />
-                    </form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button> Create </Button>
-                </Modal.Footer>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button type="submit"> Create </Button>
+                    </Modal.Footer>
+                </form>
             </Modal>
         </>
     );

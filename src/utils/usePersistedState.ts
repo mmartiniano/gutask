@@ -8,7 +8,7 @@ type Response<T> = [
 function usePersistedState<T>(key: string, initialState: T): Response<T> {
     const [state, setState] = useState(() => {
         const stored = localStorage.getItem(key);
-        
+
         if (stored)
             return JSON.parse(stored);
 

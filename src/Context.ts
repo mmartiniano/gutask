@@ -1,10 +1,10 @@
 import React, { Dispatch } from 'react';
 
-import { ITask } from './@types';
+import { Tasklist } from './models/Tasklist';
 
 
 interface State {
-    tasklist: Map<number, ITask>
+    tasklist: Tasklist
 }
 
 export enum ActionType {
@@ -16,7 +16,7 @@ export enum ActionType {
 export enum LocalStorageKey {
     CREATE_DRAFT = 'create_task',
     EDIT_DRAFT = 'edit_task',
-    WRITE_TASKLIST = 'tasklist'
+    TASKLIST = 'tasklist'
 }
 
 interface Action {
@@ -29,7 +29,7 @@ export const reducer = (state: State, action: Action): State => {
 
     switch (type) {
         case ActionType.WRITE:
-            localStorage.setItem(LocalStorageKey.WRITE_TASKLIST, JSON.stringify(payload.tasklist));
+            localStorage.setItem(LocalStorageKey.TASKLIST, JSON.stringify(payload.tasklist));
 
             return {
                 ...state,
@@ -56,8 +56,8 @@ export const reducer = (state: State, action: Action): State => {
 }
 
 const storedtasklist = () => {
-    const stored = localStorage.getItem('tasklist');
-    return stored ? JSON.parse(stored) : new Map<number, ITask>();
+    const stored = localStorage.getItem(LocalStorageKey.TASKLIST);
+    return stored ? new Tasklist(JSON.parse(stored)) : new Tasklist();
 };
 
 export const initialState: State = {

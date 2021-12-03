@@ -56,7 +56,7 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
         if (context) {
 
             const tasklist = new Tasklist(...context.state.tasklist);
-            tasklist.push(task);
+            tasklist.add(task);
 
             context.dispatch({
                 type: ActionType.WRITE,

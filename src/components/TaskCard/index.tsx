@@ -7,6 +7,7 @@ import { Container, Header, GUT } from './styles';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
     task: Task;
+    onCheck(task: Task): any;
 }
 
 const Description: React.FC<HTMLAttributes<HTMLParagraphElement>> = ({ children, ...rest }) => {
@@ -19,10 +20,10 @@ const Description: React.FC<HTMLAttributes<HTMLParagraphElement>> = ({ children,
     );
 }
 
-const TaskCard: React.FC<Props> = ({ task, children, ...rest }) => {
+const TaskCard: React.FC<Props> = ({ task, onCheck, children, ...rest }) => {
     return (
         <Container {...rest}>
-            <Icon>{task.status ? 'check_box' : 'check_box_outline_blank'}</Icon>
+            <Icon pointer onClick={() => { onCheck(task) }}>{task.status ? 'check_box' : 'check_box_outline_blank'}</Icon>
             <Description>{task.description}</Description>
             <GUT><span>{task.gut}</span></GUT>
             {children}

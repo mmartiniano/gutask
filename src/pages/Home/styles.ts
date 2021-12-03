@@ -20,3 +20,14 @@ export const Content = styled.div`
         }
     }
 `;
+
+export const Right = styled.div`
+    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+    align-content: flex-end;
+
+    div + div {
+        margin-left: 1rem;
+    }
+`;

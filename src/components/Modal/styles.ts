@@ -58,13 +58,12 @@ export const Header = styled.div`
     }
 `;
 
-
 export const StyledFooter = styled.div`
     font-size: 1.2rem;
     font-weight: bold;
     display: flex;
     justify-content: space-between;
-    float: right;
+    width: 100%;
 `;
 
 export const StyledBody = styled.div`

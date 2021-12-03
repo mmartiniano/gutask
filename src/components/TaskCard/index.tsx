@@ -21,9 +21,14 @@ const Description: React.FC<HTMLAttributes<HTMLParagraphElement>> = ({ children,
 }
 
 const TaskCard: React.FC<Props> = ({ task, onCheck, children, ...rest }) => {
+    const handleCheck = (event: React.MouseEvent<HTMLElement>) => {
+        event.stopPropagation();
+        onCheck(task);
+    }
+
     return (
         <Container {...rest}>
-            <Icon pointer onClick={() => { onCheck(task) }}>{task.status ? 'check_box' : 'check_box_outline_blank'}</Icon>
+            <Icon pointer onClick={handleCheck}>{task.status ? 'check_box' : 'check_box_outline_blank'}</Icon>
             <Description>{task.description}</Description>
             <GUT><span>{task.gut}</span></GUT>
             {children}

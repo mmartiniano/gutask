@@ -1,11 +1,11 @@
-import React, { useContext, useState, ChangeEvent } from 'react';
+import React, { useContext, useState, ChangeEvent, FormEvent } from 'react';
 import { ThemeContext } from 'styled-components';
 import Switch from 'react-switch';
 
 import { ICreateTask, IGUT } from '../../@types';
 
 import { Context, ActionType, LocalStorageKey } from '../../Context';
-import { Container, Nav } from './styles';
+import { Container, Nav, Right } from './styles';
 import Icon from '../Icon';
 import Modal from '../Modal';
 import Input from '../Input';
@@ -47,7 +47,8 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
         setDraft({ ...draft, [name]: index });
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         if (!draft.description || draft.description.trim() === '')
             return
 
@@ -139,7 +140,9 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
                         <RatingGroup />
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button type="submit"> Create </Button>
+                        <Right>
+                            <Button type="submit" style={{ alignSelf: 'flex-end' }}> Create </Button>
+                        </Right>
                     </Modal.Footer>
                 </form>
             </Modal>

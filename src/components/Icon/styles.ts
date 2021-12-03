@@ -38,5 +38,12 @@ export const MaterialIcon = styled.i`
         padding: .5rem;
         border-radius: .3rem;
         cursor: pointer;
+        transition: opacity ease-in-out .2s;
+        transition: transform ease-in-out .2s;
+
+        &:active {
+            opacity: .8;
+            transform: scale(.9, .9);
+        }
     `}
 `;

@@ -6,12 +6,18 @@ export const Container = styled.div`
     box-shadow: ${props => props.theme.shadow};
     padding: 2rem;
     font-size: .9rem;
-
     display: flex;
     justify-content: space-between;
+    transition: opacity ease-in-out .2s;
+    transition: transform ease-in-out .2s;
 
     & + & {
         margin-top: 1.5rem;
+    }
+
+    &:active {
+        opacity: .8;
+        transform: scale(99%, 99%);
     }
 `;
 

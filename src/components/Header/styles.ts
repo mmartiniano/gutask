@@ -19,3 +19,14 @@ export const Nav = styled.div`
         margin-left: 1rem;
     }
 `;
+
+export const Right = styled.div`
+    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+    align-content: flex-end;
+
+    div + div {
+        margin-left: 1rem;
+    }
+`;

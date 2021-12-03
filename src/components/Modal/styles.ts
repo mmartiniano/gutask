@@ -7,6 +7,7 @@ interface Props {
 
 export const Container = styled.div`
     width: 80%;
+    max-height: 70vh;
 
     @media only screen and (min-width: 750px) {
         & {
@@ -25,8 +26,6 @@ export const Container = styled.div`
 	border-radius: ${props => props.theme.radius};
 	overflow-y: auto;
 	margin-top: 10%;
-	min-height: 70vh;
-    max-height: 85vh;
 	
 	opacity: 0;
 
